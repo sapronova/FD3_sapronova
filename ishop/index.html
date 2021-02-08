@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html> 
+<html> 
+<head> 
+  <meta charset="utf-8" />
+  <title>iShop</title>
+</head> 
+<body> 
+  <div id="container"></div> 
+      
+  <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+      
+  <script src="itemsList.js"></script>  
+  <link rel="stylesheet" type="text/css" href="itemsList.css" />
+
+  <script>
+
+var nameofShop='BabiesBikes';
+    var positionsArr=[ 
+      {	item:2223445, name:'Balance bike', url:'https://media.thetot.com/wp-content/uploads/2018/01/14103613/BanwoodBikeDarkGreen1.jpg', price:'80 $', count:15},
+      {	item:2223489, name:'Scooter', url:'https://i1.adis.ws/i/washford/439214/EVO-Mini-Kids-Scooter---Purple-Star.webp?$sfcc_tile$&w=680', price:'38 $', count:8},
+      {	item:2223765, name:'Tricycle', url:'https://www.revedepan.com/upload/image/tricycle-metal-rouge-trybike-p-image-45526-grande.jpg', price:'75 $', count:4},
+      {	item:2223797, name:'Bike with stabilizers', url:'https://www.thebikefactory.co.uk/content/products/raleigh-raleigh-pop-12-black-inch-boys-bike-2020-model_336642.jpg', price:'97 $', count:11},
+    ];
+
+    ReactDOM.render(
+      React.createElement(ItemsList,{shop:nameofShop,positons:positionsArr}), 
+      document.getElementById('container') 
+    );
+
+  </script>
+
+</body> 
+</html>
