@@ -1,0 +1,11 @@
+.FilterComp .SelectList
+{
+    margin-top: 10px;
+}
+.FilterComp .ResetButton {
+    margin-left: 5px;
+}
+.FilterComp .SelectList .SelectField 
+{
+    min-width: 240px;
+}
