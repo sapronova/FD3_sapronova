@@ -26,14 +26,9 @@ var FilterComp=React.createClass({
       },
 
     render: function() {
+       var wordsarr=this.state.alphaorder?this.state.initwordssorted:this.props.words;
        var stringofWords=[];
-        this.state.alphaorder ? this.state.initwordssorted.forEach((v,i) => {   //поиск внутри копии отсортированного массива слов
-            if (v.indexOf(this.state.enteredtext)!=-1) {
-                var eachword=React.DOM.option({key:i},v);
-                stringofWords.push(eachword);
-            }
-           })
-        :this.props.words.forEach((v,i) => {        //поиск внутри неотсортированного массива слов
+       wordsarr.forEach((v,i) => {  
         if (v.indexOf(this.state.enteredtext)!=-1) {
             var eachword=React.DOM.option({key:i},v);
             stringofWords.push(eachword);
