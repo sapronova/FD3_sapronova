@@ -1,0 +1,42 @@
+﻿.ItemsList
+{
+  border: double gray 3px; 
+  width: min-content;
+  padding: 3px 7px;
+  background-color: #F0F0F0;
+  text-align: center; 
+}
+
+.ItemsList .Name
+{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.ItemsList table
+{
+  border: 1px solid grey; 
+  border-collapse: collapse;
+  background-color: white;
+  
+} 
+.ItemsList th {
+  min-width: 100px;
+  border: 1px solid grey; 
+} 
+
+.ItemsList td {
+  min-width: 100px;
+  border: 1px solid grey;
+  padding: 5px; 
+}
+
+.ItemsList .List .Image
+{
+  height: 200px;
+}
+.ItemsList .List .Highlightened {
+  background-color: rgba(135, 236, 185, 0.856);
+}
+ 
+
