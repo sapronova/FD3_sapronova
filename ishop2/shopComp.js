@@ -1,5 +1,5 @@
 var ShopComp = React.createClass({
-    displayName: 'ProdComp',
+    displayName: 'ShopComp',
     
     getDefaultProps: function() {
       return { shop: "Undefined" }
