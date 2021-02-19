@@ -23,10 +23,15 @@ var ShopComp = React.createClass({
         this.state.isHighlightened==='Highlightened'&&item===this.state.selectedItem?this.setState({isHighlightened: null}):this.setState({isHighlightened: 'Highlightened'});
     },
 
-    itemDelete: function(index) { 
+    itemDelete: function(item) { 
         var confirmation = confirm('You have clicked the delete-button, are you sure of your decision?');
         if (confirmation) { 
-            this.state.myProds.splice(index,1);
+            var currArray=[];
+            this.state.myProds.forEach (v => {
+                if (v.item!=item)
+                currArray.push(v);
+              });
+            this.setState({myProds: currArray}); 
         };
     },
 
@@ -37,7 +42,6 @@ var ShopComp = React.createClass({
                 cbSelected: this.itemSelected, 
                 classname:(v.item===this.state.selectedItem)?this.state.isHighlightened:null,
                 cbDelete: this.itemDelete, 
-                index: i,
             }
             ) 
         );

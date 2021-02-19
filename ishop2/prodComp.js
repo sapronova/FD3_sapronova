@@ -17,7 +17,7 @@ var ProdComp = React.createClass({
     },
 
     delItem: function (EO) {
-        this.props.cbDelete (this.props.index);
+        this.props.cbDelete (this.props.item);
     },
 
     render: function() {
