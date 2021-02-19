@@ -26,17 +26,12 @@ var ShopComp = React.createClass({
     itemDelete: function(item) { 
         var confirmation = confirm('You have clicked the delete-button, are you sure of your decision?');
         if (confirmation) { 
-            var currArray=[];
-            this.state.myProds.forEach (v => {
-                if (v.item!=item)
-                currArray.push(v);
-              });
-            this.setState({myProds: currArray}); 
+            this.setState({myProds: this.state.myProds.filter(v=>v.item!=item)}); 
         };
     },
 
     render: function() {
-        var prodList=this.state.myProds.map ((v, i) =>
+        var prodList=this.state.myProds.map (v =>
             React.createElement (ProdComp, {key:v.item, item:v.item, name:v.name, count:v.count, 
                 price:v.price, url:v.url, 
                 cbSelected: this.itemSelected, 
