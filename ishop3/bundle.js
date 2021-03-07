@@ -30638,9 +30638,9 @@ var ProdEditor = function (_React$Component) {
             inputDescriptionValidity: true,
             inputQuantity: _this.props.quantity,
             inputQuantityValidity: true,
-            isChecked: false //при нажатии кнопки Add в режиме добавления товара приобретает значение true после проверки всех полей
+            commonValidity: false
         }, _this.valueChange = function (textVal, inpName) {
-            _this.setState({ currCard: true });
+
             _this.props.cbEditon(true);
             switch (inpName) {
                 case 'Name':
@@ -30669,46 +30669,57 @@ var ProdEditor = function (_React$Component) {
                     } else _this.setState({ inputUrlValidity: true });
                     break;
             }
+            _this.setState({ currCard: true }, function () {
+                _this.commonVal();
+            });
         }, _this.valueNameChange = function (EO) {
+            if (_this.props.mode === 2) {
+                _this.addcheck();
+            };
             _this.setState({ inputName: EO.target.value });
             _this.valueChange(EO.target.value, 'Name');
         }, _this.valuePriceChange = function (EO) {
+            if (_this.props.mode === 2) {
+                _this.addcheck();
+            };
             _this.setState({ inputPrice: EO.target.value });
             _this.valueChange(EO.target.value, 'Price');
         }, _this.valueDescriptionChange = function (EO) {
+            if (_this.props.mode === 2) {
+                _this.addcheck();
+            };
             _this.setState({ inputDescription: EO.target.value });
             _this.valueChange(EO.target.value, 'Description');
         }, _this.valueQuantityChange = function (EO) {
+            if (_this.props.mode === 2) {
+                _this.addcheck();
+            };
             _this.setState({ inputQuantity: EO.target.value });
             _this.valueChange(EO.target.value, 'Quantity');
         }, _this.valueUrlChange = function (EO) {
+            if (_this.props.mode === 2) {
+                _this.addcheck();
+            };
             _this.setState({ inputUrl: EO.target.value });
             _this.valueChange(EO.target.value, 'Url');
-        }, _this.cancel = function (EO) {
+        }, _this.cancel = function () {
             _this.props.cbEditon(false);
             _this.props.cbChangemode(null);
-        }, _this.save = function (EO) {
-            if (_this.state.currCard === false) {
-                _this.cancel();
-            } else {
-                if (_this.state.inputNameValidity === true && _this.state.inputPriceValidity === true && _this.state.inputDescriptionValidity === true && _this.state.inputQuantityValidity === true && _this.state.inputUrlValidity === true) {
-                    _this.props.cbSave(_this.state.inputName, _this.state.inputPrice, _this.state.inputDescription, Number(_this.state.inputQuantity), _this.state.inputUrl);
-                    _this.cancel();
-                }
-            }
+        }, _this.save = function () {
+            _this.props.cbSave(_this.state.inputName, _this.state.inputPrice, _this.state.inputDescription, Number(_this.state.inputQuantity), _this.state.inputUrl);
+            _this.cancel();
         }, _this.addcheck = function () {
             //проверка всех полей в режиме добавления нового товара
-            if (_this.state.currCard === false) {
-                _this.cancel();
+            _this.valueChange(_this.state.inputName, 'Name');
+            _this.valueChange(_this.state.inputPrice, 'Price');
+            _this.valueChange(_this.state.inputDescription, 'Description');
+            _this.valueChange(_this.state.inputQuantity, 'Quantity');
+            _this.valueChange(_this.state.inputUrl, 'Url');
+        }, _this.commonVal = function () {
+            if (_this.state.inputNameValidity === true && _this.state.inputPriceValidity === true && _this.state.inputDescriptionValidity === true && _this.state.inputQuantityValidity === true && _this.state.inputUrlValidity === true) {
+                _this.setState({ commonValidity: true });
             } else {
-                _this.valueChange(_this.state.inputName, 'Name');
-                _this.valueChange(_this.state.inputPrice, 'Price');
-                _this.valueChange(_this.state.inputDescription, 'Description');
-                _this.valueChange(_this.state.inputQuantity, 'Quantity');
-                _this.valueChange(_this.state.inputUrl, 'Url');
-                _this.setState({ isChecked: true }, function () {
-                    _this.addfinal();
-                });
+                _this.setState({ commonValidity: false });
             }
         }, _this.addfinal = function () {
             //значения полей будут переданы, если все поля прошли валидацию
@@ -30819,8 +30830,8 @@ var ProdEditor = function (_React$Component) {
                     'value must be integer'
                 ),
                 _react2.default.createElement('br', null),
-                this.props.mode === 1 && _react2.default.createElement('input', { type: 'button', className: 'EditorButton', value: 'Save', onClick: this.save, disabled: this.state.currCard === false ? true : false }),
-                this.props.mode === 2 && _react2.default.createElement('input', { type: 'button', className: 'EditorButton', value: 'Add', onClick: this.addcheck, disabled: this.state.currCard === false ? true : false }),
+                this.props.mode === 1 && _react2.default.createElement('input', { type: 'button', className: 'EditorButton', value: 'Save', onClick: this.save, disabled: this.state.commonValidity ? false : true }),
+                this.props.mode === 2 && _react2.default.createElement('input', { type: 'button', className: 'EditorButton', value: 'Add', onClick: this.addfinal, disabled: this.state.commonValidity ? false : true }),
                 _react2.default.createElement('input', { type: 'button', className: 'EditorButton', value: 'Cancel', onClick: this.cancel })
             );
         }
