@@ -31,7 +31,7 @@ class ProdEditor extends React.Component {
         inputDescriptionValidity: true,
         inputQuantity: this.props.quantity,
         inputQuantityValidity: true,
-        isChecked:false, //при нажатии кнопки Add в режиме добавления товара приобретает значение true после проверки всех полей
+        commonValidity: false,
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -49,7 +49,7 @@ class ProdEditor extends React.Component {
       }
 
     valueChange = (textVal, inpName) => {
-        this.setState({currCard: true}); 
+        
         this.props.cbEditon (true);
         switch (inpName) {
             case 'Name':
@@ -78,64 +78,75 @@ class ProdEditor extends React.Component {
                 else this.setState({inputUrlValidity: true});
                 break;
         }
+        this.setState({currCard: true}, () => {
+            this.commonVal(); 
+        });
     }
 
     valueNameChange = (EO) => {
+        if (this.props.mode===2) {
+            this.addcheck();
+        };
         this.setState({inputName: EO.target.value});
         this.valueChange(EO.target.value, 'Name');
     }
 
     valuePriceChange = (EO) => {
+        if (this.props.mode===2) {
+            this.addcheck();
+        };
         this.setState({inputPrice: EO.target.value});
         this.valueChange(EO.target.value, 'Price');
     }
 
     valueDescriptionChange = (EO) => {
+        if (this.props.mode===2) {
+            this.addcheck();
+        };
         this.setState({inputDescription: EO.target.value});
         this.valueChange(EO.target.value, 'Description');
     }
 
     valueQuantityChange = (EO) => {
+        if (this.props.mode===2) {
+            this.addcheck();
+        };
         this.setState({inputQuantity: EO.target.value});
         this.valueChange(EO.target.value, 'Quantity');
     }
 
     valueUrlChange = (EO) => {
+        if (this.props.mode===2) {
+            this.addcheck();
+        };
         this.setState({inputUrl: EO.target.value});
         this.valueChange(EO.target.value, 'Url');
     }
 
-    cancel = (EO) => {
+    cancel = () => {
         this.props.cbEditon (false);
         this.props.cbChangemode (null);
     }
 
-    save = (EO) => {
-        if (this.state.currCard===false) {
-            this.cancel();
-        }
-        else  {
-            if (this.state.inputNameValidity===true&&this.state.inputPriceValidity===true&&this.state.inputDescriptionValidity===true&&this.state.inputQuantityValidity===true&&this.state.inputUrlValidity===true) {
+    save = () => {
                 this.props.cbSave (this.state.inputName, this.state.inputPrice, this.state.inputDescription, Number(this.state.inputQuantity), this.state.inputUrl);
                 this.cancel();
-            }
-        }
-
     }
 
     addcheck = () => {  //проверка всех полей в режиме добавления нового товара
-        if (this.state.currCard===false) {
-            this.cancel();
-        }
-        else  {
             this.valueChange(this.state.inputName, 'Name');
             this.valueChange(this.state.inputPrice, 'Price');
             this.valueChange(this.state.inputDescription, 'Description');
             this.valueChange(this.state.inputQuantity, 'Quantity');
             this.valueChange(this.state.inputUrl, 'Url');
-            this.setState({isChecked: true}, () => {
-                this.addfinal(); 
-            });
+    }
+
+    commonVal = () => {
+        if (this.state.inputNameValidity===true&&this.state.inputPriceValidity===true&&this.state.inputDescriptionValidity===true&&this.state.inputQuantityValidity===true&&this.state.inputUrlValidity===true) {
+            this.setState({commonValidity: true});
+        }
+        else {
+            this.setState({commonValidity: false});
         }
     }
 
@@ -167,8 +178,8 @@ class ProdEditor extends React.Component {
               <label><div>Quantity</div><input type="text" value={this.state.inputQuantity} onChange={this.valueQuantityChange} ></input></label>
               {(this.state.inputQuantityValidity===false)&&<span className="Valfailed">value must be integer</span>}
               <br/>
-              {(this.props.mode===1)&&<input type="button" className="EditorButton" value="Save" onClick={this.save} disabled={this.state.currCard===false?true:false}/>}
-              {(this.props.mode===2)&&<input type="button" className="EditorButton" value="Add" onClick={this.addcheck} disabled={this.state.currCard===false?true:false}/>}
+              {(this.props.mode===1)&&<input type="button" className="EditorButton" value="Save" onClick={this.save} disabled={this.state.commonValidity?false:true}/>}
+              {(this.props.mode===2)&&<input type="button" className="EditorButton" value="Add" onClick={this.addfinal} disabled={this.state.commonValidity?false:true}/>}
               <input type="button" className="EditorButton" value="Cancel" onClick={this.cancel}/>
           </div>
           );
