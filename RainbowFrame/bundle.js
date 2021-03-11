@@ -29465,7 +29465,7 @@ exports.unstable_wrap = unstable_wrap;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = __webpack_require__(2);
@@ -29481,31 +29481,39 @@ __webpack_require__(28);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RainbowFrame = function RainbowFrame(props) {
-    var i = props.colors.length - 1;
-    while (i != 0) {
-        return _react2.default.createElement(
-            'div',
-            { className: 'RainbowFrame', style: { border: "solid 10px " + props.colors[i], padding: "10px" } },
-            _react2.default.createElement(
-                RainbowFrame,
-                { colors: props.colors.slice(0, props.colors.length - 1) },
-                ' ',
-                props.children
-            )
-        );
-    }
-    return _react2.default.createElement(
-        'div',
-        { className: 'RainbowFrame', style: { border: "solid 10px " + props.colors[0], padding: "30px" } },
-        props.children
+  var framesArr = props.colors.reduce(function (r, v) {
+    return r = _react2.default.createElement(
+      'div',
+      { className: 'RainbowFrame', style: { border: "solid 10px " + v, padding: "10px" } },
+      r
     );
+  }, _react2.default.createElement(
+    'div',
+    { className: 'RainbowFrame', style: { padding: "30px" } },
+    props.children
+  ));
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    framesArr
+  );
 };
 
 RainbowFrame.propTypes = {
-    colors: _propTypes2.default.array.isRequired
+  colors: _propTypes2.default.array.isRequired
 };
 
 exports.default = RainbowFrame;
+
+/*const RainbowFrame = props => {
+  let i=props.colors.length-1;
+  if (i!=0) { 
+      return <div className='RainbowFrame' style={{border:"solid 10px "+props.colors[i], padding: "10px"}}><RainbowFrame colors={props.colors.slice(0,props.colors.length-1)}> {props.children}</RainbowFrame></div>;
+  }
+  return <div className='RainbowFrame' style={{border:"solid 10px "+props.colors[0], padding: "30px"}}>{props.children}</div>;
+}
+*/
 
 /***/ }),
 /* 24 */
