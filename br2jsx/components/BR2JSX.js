@@ -8,8 +8,9 @@ const BR2JSX = props => {
     let modifiedTexttoJSX=[];
     for (const [i, v] of modifiedText.entries()) {  
       modifiedTexttoJSX.push(v);
-      if (i!=modifiedText.length-1) {modifiedTexttoJSX.push(<br key={i}/>)};
-        };
+      modifiedTexttoJSX.push(<br key={i}/>)};
+    modifiedTexttoJSX.pop();
+    
     return <div>{modifiedTexttoJSX}</div>;
   }
   

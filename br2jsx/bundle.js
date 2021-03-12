@@ -29495,9 +29495,7 @@ var BR2JSX = function BR2JSX(props) {
       var v = _ref2[1];
 
       modifiedTexttoJSX.push(v);
-      if (i != modifiedText.length - 1) {
-        modifiedTexttoJSX.push(_react2.default.createElement('br', { key: i }));
-      };
+      modifiedTexttoJSX.push(_react2.default.createElement('br', { key: i }));
     }
   } catch (err) {
     _didIteratorError = true;
@@ -29515,6 +29513,8 @@ var BR2JSX = function BR2JSX(props) {
   }
 
   ;
+  modifiedTexttoJSX.pop();
+
   return _react2.default.createElement(
     'div',
     null,
