@@ -8,11 +8,11 @@ const BR2JSX = props => {
     let modifiedTexttoJSX=[];
     for (const [i, v] of modifiedText.entries()) {  
       modifiedTexttoJSX.push(v);
-      modifiedTexttoJSX.push(<br key={i}/>);
+      if (i!=modifiedText.length-1) {modifiedTexttoJSX.push(<br key={i}/>)};
         };
- 
     return <div>{modifiedTexttoJSX}</div>;
   }
+  
   
   BR2JSX.propTypes = {
     text: PropTypes.string.isRequired,
