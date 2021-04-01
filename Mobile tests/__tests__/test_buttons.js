@@ -7,7 +7,6 @@ configure({adapter: new Adapter()});
 import { shallow, configure, render, mount } from 'enzyme';
 
 import MobileCompany from '../components/MobileCompany';
-import MobileClient from '../components/MobileClient';
 
 let companyName='Velcom';
 let clientsArr=[ 
@@ -17,30 +16,7 @@ let clientsArr=[
   {id:120, fam:"Григорьев", im:"Григорий", otch:"Григорьевич", balance:220},
 ];
 
-/*test('работа кнопки Добавить клиента', () => {
 
-  // создаём тестовую версию компонента
-  const component = renderer.create(
-    <MobileCompany  name={companyName}
-    clients={clientsArr} /> 
-  );
-
-  let componentTree=component.toJSON();
-  expect(componentTree).toMatchSnapshot();
-
-  const buttonElem = component.root.find( el => el.props.className=='AddNewClient' ); 
-  buttonElem.props.onClick();
-
-  componentTree=component.toJSON();
-  expect(componentTree).toMatchSnapshot();
-
-  buttonElem.props.onClick();
-  
-  componentTree=component.toJSON();
-  expect(componentTree).toMatchSnapshot();
-  
-});
-*/
 test('работа кнопки mts', () => {
 
   // создаём тестовую версию компонента
