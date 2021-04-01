@@ -16,23 +16,17 @@ class MobileAdd extends React.PureComponent {
   };
 
   state = {
-    inputIdValidity: false,
     inputImValidity: false,
     inputFamValidity: false,
     inputOtchValidity: false,
     inputBalanceValidity: false,
     checked: false,
-    keysArr: null,
+    uniqueID: null,
   };
 
   
   componentWillReceiveProps = () => { 
-    let newkeysArr=[];
-    this.props.infoClients.forEach(v => {
-      newkeysArr.push(v.id);
-    });
-    this.setState({keysArr:newkeysArr});
-    console.log(newkeysArr);
+    //
   };
 
   componentWillMount = () => {
@@ -40,19 +34,23 @@ class MobileAdd extends React.PureComponent {
     this.props.infoClients.forEach(v => {
       newkeysArr.push(v.id);
     });
-    this.setState({keysArr:newkeysArr});
-    console.log(newkeysArr);
+    function getRandomInt(arr, min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      let id=Math.floor(Math.random() * (max - min)) + min;
+      if (arr.some(v=>v===id)) {
+        return getRandomInt (arr, min, max);
+      }
+      else return id;
+    }
+    let randomID=getRandomInt(newkeysArr, 100, 1000)
+    this.setState({uniqueID:randomID});
   };
 
-  newIdRef = null;
   newFamRef = null;
   newImRef = null;
   newOtchRef = null;
   newBalanceRef = null;
-
-  setNewIdRef  = (ref) => {
-    this.newIdRef=ref;
-  };
 
   setNewFamRef  = (ref) => {
     this.newFamRef=ref;
@@ -81,18 +79,7 @@ class MobileAdd extends React.PureComponent {
   save = (EO) => { 
     
     let message=[];
-    let idMessage=''; 
-    if (this.newIdRef.value.trim()===""||!Number.isInteger(Number(this.newIdRef.value))) {
-      this.setState({inputIdValidity: false});
-      idMessage='Поле ID должно принимать целое числовое значение.';
-    } 
-    else {
-      if (this.state.keysArr.some(v=>v===Number(this.newIdRef.value))) {
-        this.setState({inputIdValidity: false}),
-          idMessage='ID должен быть уникальным.'
-      }
-      else {this.setState({inputIdValidity: true})};
-    } 
+   
     this.newFamRef.value.trim()===""?(
           this.setState({inputFamValidity: false}),
           message.push(' фамилия'))
@@ -109,11 +96,11 @@ class MobileAdd extends React.PureComponent {
     
     this.setState({checked: true}, () => {
       if (this.state.inputIdValidity===false||this.state.inputFamValidity===false||this.state.inputImValidity===false||this.state.inputOtchValidity===false||this.state.inputBalanceValidity===false) {
-      alert('Проверьте правильность заполнения следующих полей: '+ message + (idMessage.trim()!=""?('\n \n'+idMessage):"."));
+      alert('Проверьте правильность заполнения следующих полей: '+ message + ".");
     }
       else {
         let editedClient={
-          id:Number(this.newIdRef.value),
+          id:this.state.uniqueID,
           im:this.newImRef.value,
           fam:this.newFamRef.value,
           otch:this.newOtchRef.value,
@@ -124,6 +111,7 @@ class MobileAdd extends React.PureComponent {
       });
   }
 
+  let 
 
   render() {
     console.log("MobileAdd render ");
@@ -131,8 +119,8 @@ class MobileAdd extends React.PureComponent {
     return (
       <div className="EditorField">
       <h4>Добавление нового абонента</h4>
-      <label><div className='InpPrefield'>Id</div><input type="text" defaultValue="" ref={this.setNewIdRef} onChange={this.typingOn}></input></label>
-      <br/>
+      <div className='InpPrefield'>ID: {this.state.uniqueID}</div>
+      <br/> <br/>
       <label><div className='InpPrefield'>Фамилия</div><input type="text" defaultValue="" ref={this.setNewFamRef} onChange={this.typingOn}></input></label>
       <br/>
       <label><div className='InpPrefield'>Имя</div><input type="text" defaultValue="" ref={this.setNewImRef} onChange={this.typingOn}></input></label>
