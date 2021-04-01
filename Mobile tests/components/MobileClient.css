@@ -1,0 +1,6 @@
+﻿td.Blocked {
+  background-color: lightpink;
+}
+td.Active {
+  background-color: lightseagreen;
+}
