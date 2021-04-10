@@ -1,6 +1,0 @@
-{
-    "port": 5000,
-    "jwtSecret":"sapronova react studyproj",
-    "mongoUri":"mongodb+srv://olgasapronova:v03031994@cluster0.cf4dt.mongodb.net/app?retryWrites=true&w=majority",
-    "baseUrl":"http://localhost:5000"
-}
