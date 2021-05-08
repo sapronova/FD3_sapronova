@@ -1,0 +1,15 @@
+div.Main {
+  font-size: large;
+  width: 500px;
+  padding: 20px;
+}
+
+div.Applesouttrue {
+  font-size: large; 
+  padding-top: 20px;
+}
+
+div.Applesouttfalse {
+  color: rgb(224, 17, 162);
+  padding-top: 20px;
+}

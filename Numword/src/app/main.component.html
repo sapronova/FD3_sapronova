@@ -1,0 +1,13 @@
+<div class='Main'>
+
+<div > Введите число: <input ngModel  #apples type="text" (input)="false"> </div>
+
+<div class='Applesouttrue' *ngIf="isNumber(apples.value)===true">
+  <span> У вас {{apples.value}} {{apples.value|numword:getAppleswordforms()}}. </span> 
+</div>
+
+<div class='Applesouttfalse' *ngIf="apples.value.length!==0&&isNumber(apples.value)===false">
+  <span> Пожалуйста, введите целое числовое значение </span> 
+</div>
+
+</div>
