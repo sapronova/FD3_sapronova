@@ -1,0 +1,11 @@
+<div class='Cash'>
+    <h3>{{getCashtype()}}</h3>
+    <span>Введите количество билетов: </span><input  #qtickets type="text" (input)="false">
+    <input class='CashButton' type="button" (click)="setNum(qticketsRef.nativeElement.value)" value="забронировать"> 
+    <div *ngIf="(getCashtype()==getActivecashtype())&&caution==''"> 
+        <div class="TicketInfo" >Для вас забронированы следующие билеты:</div>
+        <div class="Ticket"  *ngFor="let seat of getReservedtickets(), let i=index">место {{getReservedtickets()[i].seat}}</div>
+    </div>
+    <div class='InfoDiv' *ngIf="caution!=''">{{caution}}</div>
+    
+</div>

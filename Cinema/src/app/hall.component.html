@@ -1,0 +1,19 @@
+<div class='Hall'>
+  <h1>{{getName()}}</h1>
+  <table class='CommonTable'>
+    <tbody>
+      <tr>
+        <td>Всего мест:</td> <td>{{getSeats().total}}</td> 
+      </tr>
+      <tr class='FreeTickets'>
+        <td>Свободных:</td> <td>{{getSeats().free}}</td>
+      </tr>
+      <tr class='OccTickets'>
+        <td>Занято:</td> <td>{{getSeats().occupied}}</td>
+      </tr>
+    </tbody>
+  </table> 
+  <div class='SoldOut' *ngIf="getSeats().free<=0">Все билеты проданы!</div>
+  <cash [cash-type]='"Online-касса"'></cash>
+  <cash [cash-type]='"Offline-касса"'></cash>
+</div>

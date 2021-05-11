@@ -1,0 +1,47 @@
+div.Cash {
+    margin: 10px;
+    width: 45%;
+    display: inline-table;
+    border: double rgba(251, 255, 0, 0.473) 3px;
+    background-color: rgba(250, 236, 110, 0.445);
+    border-radius: 5px; 
+}
+
+div.Cash h3 {
+    text-align: center; 
+}
+
+div.Cash span {
+    font-size: medium;
+}
+
+input.CashButton {
+    background-color: rgb(233, 188, 41);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 20px; 
+    border: none;
+    margin: 5px;
+
+}
+
+input.CashButton:hover {
+    cursor: pointer;
+}
+
+div.InfoDiv {
+    color: rgb(194, 54, 96);
+    text-align: center;
+    font-size: medium;
+}
+
+div.TicketInfo {
+    font-size: medium;
+}
+
+div.Ticket {
+    border: dashed rgba(255, 230, 0, 0.473) 3px;
+    border-radius: 10px;
+    margin: 5px;
+    text-align: center;
+    background-color: white;
+} 
